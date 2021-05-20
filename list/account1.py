@@ -24,34 +24,33 @@ class Account(object):
 
         return first + '-' + second + '-' + third
 
+    def deposit(self):
+        amount = ''
+        if amount >= 1:
+            self.balance += amount
+        return
+
+
     @staticmethod
     def main():
 
         account_number = 0
-        ls = []
         while 1:
-            menu = input('0.취소 1.계좌생성 2.확인 3.제거')
+            menu = input('0.취소 1.계좌생성 2.확인 3.입금')
 
             if menu == '0':
                 break
             elif menu == '1':
-                ls.append(Account(input('예금주를 입력해주세요'),int(input('초기잔액을 입력해주세요'))))
-                account_number+=1
-                print(f'생성 계좌 수: {account_number}')
+               a = Account(input('예금주를 입력해주세요'),int(input('초기잔액을 입력해주세요')))
+               account_number+=1
+               print(f'생성 계좌 수: {account_number}')
 
             elif menu == '2':
-                for i in ls:
-                    print(i.get_account())
+               print(a.get_account())
 
             elif menu == '3':
-                send_who = input('제거 할 계좌명: ')
-                #send_how = input('입금할 금액: ')
-                for i, j in enumerate(ls):
-                    if j.holder == send_who:
-                        del ls[i]
-
-
-
+                deposit = input('입금할 금액')
+                print(a.deposit())
 
             else:
                 print('잘못된 입력입니다')
