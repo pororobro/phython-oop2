@@ -3,17 +3,19 @@
 import random
 
 class Account(object):
-    def __init__(self, holder, balance):
+    def __init__(self, holder,account_number, balance):
         self.bank = 'SC제일은행'
         self.holder = holder
         self.balance = balance
+        self.account_number = account_number
 
 
     def get_account(self):
 
-        return f'은행이름:{self.bank} 예금주:{self.holder} 계좌번호:{self.random_number()} 잔액:{self.balance}'
+        return f'은행이름:{self.bank} 예금주:{self.holder} 계좌번호:{self.account_number} 잔액:{self.balance}'
 
-    def random_number(self):
+    @staticmethod
+    def random_number():
         first = random.randint(0, 999)
         second = random.randint(0, 99)
         third = random.randint(0, 999999)
@@ -27,7 +29,7 @@ class Account(object):
     @staticmethod
     def main():
 
-        account_number = 0
+        account_howmany = 0
         ls = []
         while 1:
             menu = input('0.취소 1.계좌생성 2.확인 3.제거')
@@ -35,23 +37,19 @@ class Account(object):
             if menu == '0':
                 break
             elif menu == '1':
-                ls.append(Account(input('예금주를 입력해주세요'),int(input('초기잔액을 입력해주세요'))))
-                account_number+=1
-                print(f'생성 계좌 수: {account_number}')
+                ls.append(Account(input('예금주를 입력해주세요'),Account.random_number(),int(input('초기잔액을 입력해주세요'))))
+                account_howmany+=1
+                print(f'생성 계좌 수: {account_howmany}')
 
             elif menu == '2':
                 for i in ls:
                     print(i.get_account())
 
             elif menu == '3':
-                send_who = input('제거 할 계좌명: ')
-                #send_how = input('입금할 금액: ')
+                del_number = input('제거 할 계좌번호: ')
                 for i, j in enumerate(ls):
-                    if j.holder == send_who:
+                    if j.account_number == del_number:
                         del ls[i]
-
-
-
 
             else:
                 print('잘못된 입력입니다')

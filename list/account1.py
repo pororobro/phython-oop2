@@ -27,8 +27,16 @@ class Account(object):
         return first + '-' + second + '-' + third
 
     @staticmethod
-    def main():
+    def del_number(ls,account_number):
+        for i, j in enumerate(ls):
+            if j.account_number == account_number:
+                del ls[i]
+            else :
+                print('삭제 가능한 계좌가 없습니다')
 
+    @staticmethod
+    def main():
+        a = Account
         account_howmany = 0
         ls = []
         while 1:
@@ -37,19 +45,20 @@ class Account(object):
             if menu == '0':
                 break
             elif menu == '1':
-                ls.append(Account(input('예금주를 입력해주세요'),Account.random_number(),int(input('초기잔액을 입력해주세요'))))
+                ls.append(a(input('예금주를 입력해주세요'),a.random_number(),int(input('초기잔액을 입력해주세요'))))
                 account_howmany+=1
                 print(f'생성 계좌 수: {account_howmany}')
 
             elif menu == '2':
-                for i in ls:
-                    print(i.get_account())
+                if account_howmany == 0:
+                   print('조회할 계좌가 없습니다')
+                else:
+                    for i in ls:
+                        print(i.get_account())
+
 
             elif menu == '3':
-                del_number = input('제거 할 계좌번호: ')
-                for i, j in enumerate(ls):
-                    if j.account_number == del_number:
-                        del ls[i]
+                a.del_number(ls,input('삭제할 계좌번호'))
 
             else:
                 print('잘못된 입력입니다')
