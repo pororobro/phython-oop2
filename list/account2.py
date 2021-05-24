@@ -2,27 +2,17 @@ import random
 
 class Account(object):
 
-    def __init__(self, name , money):
+    def __init__(self, account_number, name , money):
         self.BANK = 'SC은행'  # 상수라서 대문자
         self.name = name
-        self.account_number = self.create_account_number()
+        self.account_number = account_number
         self.money = money
 
     '''
        계좌번호는 3자리-2자리-6자리 형태로 랜덤하게 생성됩니다.
     '''
 
-    def create_account_number(self):
-        ls = []
-        for i in range(3):
-            ls.append(str(random.randint(0,9)))
-        ls.append('-')
-        for i in range(2):
-            ls.append(str(random.randint(0, 9)))
-        ls.append('-')
-        for i in range(6):
-                ls.append(str(random.randint(0, 9)))
-        return "".join(ls)
+
 
     def to_string(self):
         return f' Bank Bank:{self.BANK},'\
@@ -37,6 +27,19 @@ class Account(object):
                 del ls[i]
 
     @staticmethod
+    def create_account_number():
+        ls = []
+        for i in range(3):
+            ls.append(str(random.randint(0,9)))
+        ls.append('-')
+        for i in range(2):
+            ls.append(str(random.randint(0, 9)))
+        ls.append('-')
+        for i in range(6):
+                ls.append(str(random.randint(0, 9)))
+        return "".join(ls)
+
+    @staticmethod
     def main():
         ls = []
         a = Account
@@ -47,7 +50,7 @@ class Account(object):
                # account = Account(None, None)
                 break
             elif menu == '1':
-                ls.append(a(input('name'),
+                ls.append(a(a.create_account_number(),input('name'),
                                   input('money')))
             elif menu == '2':
                 for i in ls:
@@ -56,22 +59,23 @@ class Account(object):
             elif menu == '3':
                 account_number = input('입금할 계좌번호')
                 money = input('입금할 금액')
-                if j.account_number == account_number:
-                    replace = Account(j.account_number,
-                                      j.name,
-                                      int(j.money) + int(money))  # 입금 +
-                    Account.del_account(ls, account_number)
-                    ls.append(replace)
+                for i, j in enumerate(ls):
+                    if j.account_number == account_number:
+                        replace = a(j.account_number,
+                                          j.name,
+                                          int(j.money) + int(money))  # 입금 +
+                        a.del_account(ls, account_number)
+                        ls.append(replace)
 
             elif menu == '4':
                 account_number = input('출금할 계좌번호')
                 money = input('출금액 입력바랍니다')
                 for i, j in enumerate(ls):
                     if j.account_number == account_number:
-                        replace = Account(j.account_number,
+                        replace = a(j.account_number,
                                           j.name,
                                           int(j.money) - int(money))  # 출금 -
-                        Account.del_account(ls, account_number)
+                        a.del_account(ls, account_number)
                         ls.append(replace)
 
             elif menu == '5':
