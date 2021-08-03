@@ -23,5 +23,6 @@ class Wikipedia(object):
             else :
                 print('Wrong number')
                 continue
+                
 
 Wikipedia.main()
