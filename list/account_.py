@@ -2,6 +2,7 @@ import random
 
 
 class Account(object):
+    
 
     def __init__(self, account_number, name, money):
         self.BANK_NAME = 'SC은행'
