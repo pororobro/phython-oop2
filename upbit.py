@@ -28,6 +28,7 @@ def get_balance(ticker):
                 return 0
     return 0
 
+
 def get_current_price(ticker):
     """현재가 조회"""
     return pyupbit.get_orderbook(tickers=ticker)[0]["orderbook_units"][0]["ask_price"]
